@@ -9,6 +9,10 @@ import observer.Quackologist;
 
 public class Main {
 
+    public static void simulate(Quackable duck) {
+        duck.quack();
+    }
+
     public static void main(String[] args) {
 
         AbstractDuckFactory duckFactory = new CountingDuckFactory();
@@ -30,13 +34,17 @@ public class Main {
         mainFlock.add(gooseDuck);
         mainFlock.add(mallardFlock);
 
-        Quackologist quackologist = new Quackologist();
-        mainFlock.registerObserver(quackologist);
+        Quackologist observer = new Quackologist();
+        mainFlock.registerObserver(observer);
 
         System.out.println("Duck Simulator");
         System.out.println("--------------------");
 
-        mainFlock.quack();
+        System.out.println("Whole Flock Simulation");
+        simulate(mainFlock);
+
+        System.out.println("\nMallard Flock Simulation");
+        simulate(mallardFlock);
 
         System.out.println("--------------------");
         System.out.println("Total duck quacks counted: " + QuackCounter.getQuacks());
